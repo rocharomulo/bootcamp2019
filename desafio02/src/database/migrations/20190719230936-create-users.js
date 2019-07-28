@@ -20,7 +20,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      // Se cliente, provider=FALSE, se prestador de serviços, provider=TRUE
       created_at: {
         type: Sequelize.DATE,
         allowNull: false,
