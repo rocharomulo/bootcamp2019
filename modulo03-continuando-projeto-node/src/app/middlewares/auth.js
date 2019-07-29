@@ -1,4 +1,4 @@
-// verifica se usuário está logado
+// Verifica se usuário está logado
 
 import jwt from 'jsonwebtoken';
 
