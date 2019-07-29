@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 // promisify é uma função que pega uma função de callback e transforma ela numa função que pode usar async/await
 import { promisify } from 'util';
 
-// importa o segredo do token
+// Importa o segredo do token
 import authConfig from '../../config/auth';
 
 export default async (req, res, next) => {
@@ -14,7 +14,7 @@ export default async (req, res, next) => {
 
   if (!authHeader) {
     // não autorizado
-    return escape.status(401).json({ error: 'Token not provided' });
+    return res.status(401).json({ error: 'Token not provided' });
   }
 
   // dividir o token em um array, com separação onde há um espaço.
