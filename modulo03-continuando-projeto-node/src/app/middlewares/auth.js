@@ -2,7 +2,7 @@
 
 import jwt from 'jsonwebtoken';
 
-// promisify é uma função que pega uma função de callback e transforma ela numa função que pode usar async/await
+// Promisify é uma função que pega uma função de callback e transforma ela numa função que pode usar async/await
 import { promisify } from 'util';
 
 // Importa o segredo do token
