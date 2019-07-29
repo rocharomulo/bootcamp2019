@@ -14,7 +14,7 @@ export default async (req, res, next) => {
 
   if (!authHeader) {
     // não autorizado
-    return escape.status(401).json({ error: 'Token not provided' });
+    return res.status(401).json({ error: 'Token not provided' });
   }
 
   // dividir o token em um array, com separação onde há um espaço.
