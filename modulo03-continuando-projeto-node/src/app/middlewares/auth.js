@@ -31,11 +31,12 @@ export default async (req, res, next) => {
     const decoded = await promisify(jwt.verify)(token, authConfig.secret);
 
     // importar o id do usuário para o req
-    req.userId = decoded.id;
+    req.user_id = decoded.id;
 
     // se deu tudo certo com a verificação, dentro da constante 'decoded'
     // estarão as informações que usamos na hora de gerar o token
     console.log(decoded);
+    console.log(req.userId);
 
     // se chegou até aqui, uso o next() para dizer que o usuário pode acessar o controller normalmente,
     // porque ele está autenticado

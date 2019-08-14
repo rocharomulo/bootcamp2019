@@ -10,6 +10,7 @@ import ProviderController from './app/controllers/ProviderController'; // import
 
 // importa middleware de autenticação da sessão
 import authMiddleware from './app/middlewares/auth';
+import AppointmentController from './app/controllers/AppointmentController';
 
 const routes = new Router();
 const upload = multer(multerConfig); // passa o arquivo multerConfig como parâmetro para o upload de arquivos
@@ -30,6 +31,9 @@ routes.put('/users', UserController.update);
 
 // Listar todos os provedores da tabela de usuários
 routes.get('/providers', ProviderController.index);
+
+// Agendar serviço
+routes.post('/appointments', AppointmentController.store);
 
 // Upload do arquivo com avatar do usuário, colocamos um middleware a mais nesta rota: upload.single
 routes.post('/files', upload.single('file'), FileController.store);
