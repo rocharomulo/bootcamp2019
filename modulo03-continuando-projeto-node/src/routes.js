@@ -7,6 +7,7 @@ import UserController from './app/controllers/UserController'; // importa UserCo
 import SessionController from './app/controllers/SessionController'; // importa SessionController
 import FileController from './app/controllers/FileController'; // importa FileController
 import ProviderController from './app/controllers/ProviderController'; // importa FileController
+import ScheduleController from './app/controllers/ScheduleController'; // import ScheduleController
 
 // importa middleware de autenticação da sessão
 import authMiddleware from './app/middlewares/auth';
@@ -32,8 +33,12 @@ routes.put('/users', UserController.update);
 // Listar todos os provedores da tabela de usuários
 routes.get('/providers', ProviderController.index);
 
-// Agendar serviço
+// Appointments
+routes.get('/appointments', AppointmentController.index);
 routes.post('/appointments', AppointmentController.store);
+
+// Schedules (Agendas dos Prestadores)
+routes.get('/schedule', ScheduleController.index);
 
 // Upload do arquivo com avatar do usuário, colocamos um middleware a mais nesta rota: upload.single
 routes.post('/files', upload.single('file'), FileController.store);

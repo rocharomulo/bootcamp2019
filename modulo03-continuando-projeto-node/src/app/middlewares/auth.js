@@ -31,7 +31,7 @@ export default async (req, res, next) => {
     const decoded = await promisify(jwt.verify)(token, authConfig.secret);
 
     // importar o id do usuário para o req
-    req.user_id = decoded.id;
+    req.userId = decoded.id;
 
     // se deu tudo certo com a verificação, dentro da constante 'decoded'
     // estarão as informações que usamos na hora de gerar o token
