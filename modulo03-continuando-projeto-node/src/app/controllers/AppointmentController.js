@@ -1,6 +1,8 @@
 import * as Yup from 'yup'; // esquema de validação
-import { startOfHour, parse, isBefore } from 'date-fns'; // importa alguns métodos da biblioteca que lida com datas
+import { startOfHour, parse, isBefore, format } from 'date-fns'; // importa alguns métodos da biblioteca que lida com datas
+import pt from 'date-fns/locale/pt';
 import Appointment from '../models/Appointment';
+import Notification from '../schemas/Notification';
 import User from '../models/User';
 import File from '../models/File';
 
@@ -59,7 +61,7 @@ class AppointmentController {
         .status(401)
         .json({ error: 'You can only create appointments with providers' });
     }
-    console.log(date);
+
     // validação da hora de início
     //   parseISO transforma a string em um objeto date do JS para ser usando denetro do método StartOfHour
     //   ou seja, vai pegar apenas a hora e não os minutos e segundos (sempre vai zerar minutos e segundos)
@@ -91,6 +93,19 @@ class AppointmentController {
       user_id: req.userId,
       provider_id,
       date,
+    });
+
+    // busca o nome do usuario na tabela
+    const user = await User.findByPk(req.userId);
+
+    const formattedDate = format(hourStart, 'DD [de] MMMM [às] H:mm', {
+      locale: pt,
+    });
+
+    // notificar prestador de serviço
+    await Notification.create({
+      content: `Novo agendamento de ${user.name} para dia ${formattedDate}`,
+      user: provider_id,
     });
 
     return res.json(appointment);
